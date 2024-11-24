@@ -4,18 +4,16 @@ from datetime import datetime
 
 startTime = datetime.now()
 
-# Load the trained model
 filename = "model.sv"
 model = pickle.load(open(filename, 'rb'))
 
-# Dictionaries for categorical encoding
 sex_d = {0: "Kobieta", 1: "Mężczyzna"}
 chest_pain_d = {0: "Typ 1", 1: "Typ 2", 2: "Typ 3", 3: "Typ 4"}
 resting_ecg_d = {0: "Normalny", 1: "Nieprawidłowość ST", 2: "Lewy blok odnogi pęczka Hisa"}
 exercise_angina_d = {0: "Nie", 1: "Tak"}
 st_slope_d = {0: "Opadający", 1: "Płaski", 2: "Wzrastający"}
 
-# Reverse dictionaries for encoding user input
+
 reverse_resting_ecg_d = {v: k for k, v in resting_ecg_d.items()}
 
 def main():
@@ -24,7 +22,7 @@ def main():
     left, right = st.columns(2)
     prediction = st.container()
 
-    st.image("images/heart.jpg", caption="Predykcja chorób serca", use_container_width=True)
+    st.image("https://www.malopolska.pl/_cache/news--2023/1700-956/fit/serce.jpg", caption="Predykcja chorób serca", use_container_width=True)
 
     with overview:
         st.title("Predykcja ryzyka chorób serca")
@@ -43,7 +41,7 @@ def main():
         max_hr_slider = st.slider("Maksymalne tętno", min_value=60, max_value=220, step=1, value=150)
         oldpeak_slider = st.slider("Depresja ST", min_value=0.0, max_value=6.0, step=0.1, value=1.5)
 
-    # Prepare input data for the model
+
     data = [[
         age_slider,
         sex_radio,
@@ -51,14 +49,14 @@ def main():
         resting_bp_slider,
         cholesterol_slider,
         fasting_bs_radio,
-        reverse_resting_ecg_d["Normalny"],  # Default value, replace if needed
+        reverse_resting_ecg_d["Normalny"],
         max_hr_slider,
         exercise_angina_radio,
         oldpeak_slider,
         st_slope_radio
     ]]
 
-    # Make predictions
+
     prediction_result = model.predict(data)
     prediction_confidence = model.predict_proba(data)
 
