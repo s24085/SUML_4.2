@@ -22,7 +22,7 @@ def main():
     left, right = st.columns(2)
     prediction = st.container()
 
-    st.image("https://www.malopolska.pl/_cache/news--2023/1700-956/fit/serce.jpg", caption="Predykcja chorób serca", use_container_width=True)
+    st.image("https://adst.mp.pl/img/articles/www/pacjent/poradnik_swiadomego_pacjenta/istock-947331372-640.jpg", caption="Predykcja chorób serca", use_container_width=True)
 
     with overview:
         st.title("Predykcja ryzyka chorób serca")
